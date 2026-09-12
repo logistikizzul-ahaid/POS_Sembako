@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { @apply bg-gray-100 text-gray-900; }
+
+/* =========================================================
+   THERMAL RECEIPT PRINT STYLES (window.print fallback)
+   Struk hanya terlihat penuh saat mode print, disembunyikan di layar.
+   ========================================================= */
+.thermal-receipt {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .thermal-receipt, .thermal-receipt * {
+    visibility: visible;
+  }
+  .thermal-receipt {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .thermal-receipt.size-58mm { width: 58mm; }
+  .thermal-receipt.size-80mm { width: 80mm; }
+
+  @page {
+    margin: 0;
+    size: auto;
+  }
+}
